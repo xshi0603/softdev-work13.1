@@ -1,6 +1,4 @@
-var c = document.getElementById("svgg");
-var cbutton = document.getElementById("cbutton");
-var jbutton = document.getElementById("jbutton");
+var svg = document.getElementById("svgg");
 
 var createCircle = function (x, y, r, color) {
 
@@ -13,38 +11,19 @@ var createCircle = function (x, y, r, color) {
 
 };
 
-var cn_scores = [11, 8, 10];
-var jp_scores = [4, 5, 4];
+var data = [
+	    [1.7, 4], [3.3, 8], [5, 13], [6.7, 20], [8.3, 28], [10, 39],
+	    [11.7, 53], [13.3, 68], [15, 86], [16.7, 106] ];
 
-var c1 = createCircle(100, 100, 10, "gold");
-var c2 = createCircle(275, 275, 10, "gray");
-var c3 = createCircle(450, 450, 10, "brown");
-
-c.append(c1);
-c.append(c2);
-c.append(c3);
-
-var change = function() {
-
-    var circles = d3.selectAll("circle");
-    circles.data(cn_scores);
-    circles.attr("r", function(d) {
-	return 4 * d;
-	});
-	
+var plot = function() {
+    var container = d3.select("svg");
+    var circles = container.selectAll("circle").data(data).enter();    
+    circles.append("circle")
+    .attr("cx", function(d) { return 20 * d[0]; })
+    .attr("cy", function(d) { return 500 - d[1] * 4; })
+    .attr("r", 10)
+    .attr("fill", "pink");
+    svg.append(circles);
 };
 
-var change2 = function() {
-
-    var circles = d3.selectAll("circle");
-    circles.data(jp_scores);
-    circles.attr("r", function(d) {
-	return 4 * d;
-	});
-	
-};
-
-change();
-
-cbutton.addEventListener("click", change);
-jbutton.addEventListener("click", change2);
+plot();
