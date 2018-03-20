@@ -19,8 +19,8 @@ var plot = function() {
     var container = d3.select("svg");
     var circles = container.selectAll("circle").data(data).enter();    
     circles.append("circle")
-    .attr("cx", function(d) { return 20 * d[0]; })
-    .attr("cy", function(d) { return 500 - d[1] * 4; })
+    .attr("cx", function(d) { return 27 * d[0] + 40; })
+    .attr("cy", function(d) { return 465 - d[1] * 4; })
     .attr("r", 10)
     .attr("fill", "pink");
     svg.append(circles);
